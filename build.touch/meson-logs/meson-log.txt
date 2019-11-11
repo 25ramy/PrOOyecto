@@ -1,0 +1,46 @@
+Build started at 2019-11-07T17:29:56.461139
+Main binary: /usr/bin/python3
+Python system: Linux
+The Meson build system
+Version: 0.45.1
+Source dir: /home/ramiro/Documentos/robot
+Build dir: /home/ramiro/Documentos/robot/build.touch
+Build type: native build
+Project name: TP3
+Sanity testing C++ compiler: c++
+Is cross compiler: False.
+Sanity check compiler command line: c++ /home/ramiro/Documentos/robot/build.touch/meson-private/sanitycheckcpp.cc -o /home/ramiro/Documentos/robot/build.touch/meson-private/sanitycheckcpp.exe
+Sanity check compile stdout:
+
+-----
+Sanity check compile stderr:
+
+-----
+Running test binary command: /home/ramiro/Documentos/robot/build.touch/meson-private/sanitycheckcpp.exe
+Native C++ compiler: c++ (gcc 7.4.0 "c++ (Ubuntu 7.4.0-1ubuntu1~18.04.1) 7.4.0")
+Build machine cpu family: x86_64
+Build machine cpu: x86_64
+Running command: /home/ramiro/Documentos/robot/.getsrc.sh src
+--- stdout----
+src/holi.cpp
+
+----stderr----
+
+
+Running command: /home/ramiro/Documentos/robot/.getsrc.sh lib
+--- stdout----
+lib/XmlRpcClient.cpp
+lib/XmlRpcDispatch.cpp
+lib/XmlRpcServer.cpp
+lib/XmlRpcServerConnection.cpp
+lib/XmlRpcServerMethod.cpp
+lib/XmlRpcSocket.cpp
+lib/XmlRpcSource.cpp
+lib/XmlRpcUtil.cpp
+lib/XmlRpcValue.cpp
+
+----stderr----
+
+
+Build targets in project: 1
+Found ninja-1.8.2 at /usr/bin/ninja

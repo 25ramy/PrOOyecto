@@ -1,0 +1,10 @@
+actv
+art1 90
+art2 -9000
+art1 -81.2
+pin 1
+hom
+art1 30
+pin 0
+rep
+desactv

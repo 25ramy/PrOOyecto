@@ -1,0 +1,15 @@
+meson build
+touch meson.build
+cd build
+ninja
+./server ctrl alt t
+./client localhost 8080
+
+
+ls | entr .scripts/run.sh
+
+
+ctrol alt t abre
+ctrl mayus t clona
+
+python3 server.py
