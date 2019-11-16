@@ -9,10 +9,10 @@ import websockets
 import random
 import json
 from time import sleep
-
+import concurrent.futures
 # web socket antes de return art1 2 3
 # open close en actv desact escritura en art1 2 3 pin para vic graficas
-
+pool = concurrent.futures.ThreadPoolExecutor()
 robot = Robot()
 reportes = Reporte()
 f = open("build/graficas.txt", "w")
@@ -124,11 +124,25 @@ async def efec(n):
 
 def rep(n):
     aux2 = ""
-
     for aux in reportes.get_reporte():
         aux2 = aux2+aux+"\n"
-
     return aux2
+
+def efec_sync(n):
+    return pool.submit(asyncio.run, efec(n)).result()
+
+def hom_sync(n):
+    return pool.submit(asyncio.run, hom(n)).result()
+
+def art1_sync(n):
+    return pool.submit(asyncio.run, art1(n)).result()
+
+def art2_sync(n):
+    return pool.submit(asyncio.run, art2(n)).result()
+
+def art3_sync(n):
+    return pool.submit(asyncio.run, art3(n)).result()
+
 
 
 async def server(websocket, path):
@@ -167,16 +181,16 @@ async def server(websocket, path):
 
         print("La carga automatica ha finalizado... Por favor Reinicie")
         sys.exit(0)
-    server.register_function(art1, "art1")
-    server.register_function(art2, "art2")
-    server.register_function(art3, "art3")
-    server.register_function(efec, "efec")
+    server.register_function(art1_sync, "art1")
+    server.register_function(art2_sync, "art2")
+    server.register_function(art3_sync, "art3")
+    server.register_function(efec_sync, "efec")
     server.register_function(rep, "rep")
     server.register_function(actv, "actv")
     server.register_function(desactv, "desactv")
-    server.register_function(hom, "hom")
+    server.register_function(hom_sync, "hom")
 
-    server.serve_forever()
+    asyncio.ensure_future(server.serve_forever())
 
 
 start_server = websockets.serve(server, "127.0.0.1", 5678)
