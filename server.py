@@ -28,9 +28,9 @@ web = websckt()
 
 def get_robot_status():
     payload = {
-        "art_1": robot.vinculo1.get_posicion(),
-        "art_2": robot.vinculo2.get_posicion(),
-        "art_3": robot.vinculo3.get_posicion(),
+        "a_1": robot.vinculo1.get_posicion(),
+        "a_2": robot.vinculo2.get_posicion(),
+        "a_3": robot.vinculo3.get_posicion(),
         "pinza": robot.efector.get_estado()
     }
     print(payload)
@@ -55,7 +55,7 @@ async def art1(n):
         reportes.add_reporte("art1:"+str(robot.vinculo1.get_posicion()))
         articulaciones = [int(robot.vinculo1.get_posicion()), int(
             robot.vinculo2.get_posicion()), int(robot.vinculo3.get_posicion())]
-        await f.write(str(articulaciones)+"\n")
+        f.write(str(articulaciones)+"\n")
         await web.socket.send(json.dumps(get_robot_status(), ensure_ascii=False))
         return articulaciones
     else:
@@ -68,7 +68,7 @@ async def art2(n):
         reportes.add_reporte("art2:"+str(robot.vinculo2.get_posicion()))
         articulaciones = [int(robot.vinculo1.get_posicion()), int(
             robot.vinculo2.get_posicion()), int(robot.vinculo3.get_posicion())]
-        await f.writelines(str(articulaciones)+"\n")
+        f.writelines(str(articulaciones)+"\n")
         await web.socket.send(json.dumps(get_robot_status(), ensure_ascii=False))
         return articulaciones
     else:
@@ -81,7 +81,7 @@ async def art3(n):
         reportes.add_reporte("art3:"+str(robot.vinculo3.get_posicion()))
         articulaciones = [int(robot.vinculo1.get_posicion()), int(
             robot.vinculo2.get_posicion()), int(robot.vinculo3.get_posicion())]
-        await f.writelines(str(articulaciones)+"\n")
+        f.writelines(str(articulaciones)+"\n")
         await web.socket.send(json.dumps(get_robot_status(), ensure_ascii=False))
         return articulaciones
     else:
@@ -146,7 +146,7 @@ async def server(websocket, path):
             if(palabras[0] == "actv"):
                 print(actv(n))
             if(palabras[0] == "desactv"):
-                print(await desactv(n))
+                print(desactv(n))
             if(palabras[0] == "art1"):
                 n = float(palabras[1])
                 print(await art1(n))
@@ -163,7 +163,7 @@ async def server(websocket, path):
                 print(await hom(n))
             if(palabras[0] == "rep"):
                 print(rep(n))
-            sleep(5 + random.random() * 5)
+            sleep(1 + random.random() * 5)
 
         print("La carga automatica ha finalizado... Por favor Reinicie")
         sys.exit(0)
@@ -181,5 +181,6 @@ async def server(websocket, path):
 
 start_server = websockets.serve(server, "127.0.0.1", 5678)
 
+#
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
